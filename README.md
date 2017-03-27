@@ -1,4 +1,4 @@
-# Manual para el uso de la plataforma para empresas de Licity
+# Manual del uso de la plataforma para empresas de Licity
 Esta documentación muestra el uso de la plataforma para la firma de contratos de Licity. La plataforma permite la firma de contratos mediante el uso de un token de acceso proporcionado por Licity.
 
 Esta documentación y código de ejemplo se encuentra disponible en la URL https://www.licity.co/api/
