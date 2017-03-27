@@ -8,24 +8,24 @@ Todas las peticiones a la plataforma deben de realizarse vía POST y responderá
 Tabla de Contenidos
 ===================
 
-  - [Instalación](#instalacion)
+  - [Instalación](#instalación)
   - [Uso](#uso)
-    - [A) Muestra preliminar del contrato y solicitud de firma y foto](#a-muestra-preliminar-del-contrato-y-solicitud-de-firma-y-foto)
-	- [B) Descarga de contrato](#b-descarga-de-contrato) 
-	- [C) Lista de contratos](#c-lista-de-contratos)
-	- [D) Validación de contrato](#d-validacion-de-contrato)
+    - [A) Muestra preliminar del contrato y solicitud de firma y foto](#muestra)
+	- [B) Descarga de contrato](#descarga) 
+	- [C) Lista de contratos](#lista)
+	- [D) Validación de contrato](#valida)
   - [Licencia](#licencia)
 
-## Instalación
+## <a name="instalacion"></a>Instalación
 Obtén la última versión de esta plataforma:
 
     git clone https://github.com/licity/api
 
-## Uso
+## <a name="uso"></a>Uso
 
 A continuación se describen las distintas funcionalidades que proporciona la plataforma.
 
-### A) Muestra preliminar del contrato y solicitud de firma y foto
+### <a name="muestra"></a>A) Muestra preliminar del contrato y solicitud de firma y foto
 Esta primera etapa de la plataforma es una aplicación web que puede ser mostrada de forma directa en un navegador de escritorio o dispositivo móvil, así como puede ser llamada desde una webview dentro de una aplicación móvil.
 
 Al momento de contratar el servicio con Licity, la empresa deberá de proporcionar la plantilla de su contrato que deberá de contener etiquetas del tipo `[ETIQUETA]` que serán reemplazadas por los valores enviados vía POST.
@@ -102,7 +102,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```
 
-### B) Descarga de contrato
+### <a name="descarga"></a>B) Descarga de contrato
 Esta sección de la plataforma permite la descarga de un contato a partir de su ID.
 
 - **URL:** http://www.licity.co/api/contrato/[ID_Contrato] (El ID del contrato se obtiene utilizando el listado de contratos descrito porsteriormente)
@@ -159,7 +159,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```      
 
-### C) Lista de contratos
+### <a name="lista"></a>C) Lista de contratos
 Esta sección de la plataforma permite listar los contratos que pertenecen al TOKEN enviado.
 
 - **URL:** http://www.licity.co/api/contrato 
@@ -240,7 +240,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```      
 
-### D) Validación de contrato
+### <a name="valida"></a>D) Validación de contrato
 Esta sección de la plataforma permite validar cualquier contrato generado desde nuestra plataforma.
 
 - **URL:** http://www.licity.co/api/contrato/valida
