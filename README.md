@@ -228,5 +228,87 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
 	</body>
   </html>
   ```      
+
+### C) Validación de contrato
+Esta sección de la plataforma permite validar cualquier contrato generado desde nuestra plataforma.
+
+- **URL:** http://www.licity.co/api/contrato/valida
+- **Varibles POST requeridas:**
+  - **token:** Proporcionado por Licity.
+  - **documentId:** ID del contrato, se localiza al pie de página de cada una de las hojas del contrato.
+  - **pdf:** Archivo binario del contrato en formato PDF.
+- **Respuesta:**
+  - **Lista de contratos exitosa:**
+    - **Formato:** JSON.
+    - **Contenido:** Se muestra el estatus de la solicitud y la validez del contrato.
+
+      Dos posibles mensajes:
+	  
+      **El contrato es válido**
+
+	  ```JSON
+	  {
+	  	"estatus" : "OK",
+	  	"valido" : 1,
+	  }
+	  ```
+
+      **El contrato no es válido**
+
+	  ```JSON
+	  {
+	  	"estatus" : "OK",
+	  	"valido" : 0,
+	  }
+	  ```
+
+  - **Error:**
+    - **Formato:** JSON.
+    - **Contenido:**
+
+      Dos posibles mensajes de error:
+
+      **El documentId ingresado no existe**
+
+      Se genera cuando el Document ID ingresado no existe o no pertenece al Token enviado
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "El documentId ingresado no existe"
+      }
+      ```
+
+      **Los datos enviados son incorrectos**
+
+      Se genera cuando el token enviado no es correcto o no se encuentra vigente. Es necesario validar que el token de acceso sea correcto.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "Los datos enviados son incorrectos"
+      }
+      ```
+- **Código muestra:** 
+Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/valida.html).
+
+  ```HTML
+  <!DOCTYPE html>
+  <html>
+  	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Prueba de listado de contratos</title>
+	</head>
+	<body>
+		<form action="https://www.licity.co/api/contrato/valida" method="post" enctype="multipart/form-data">
+			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<input type="file" name="pdf" id="pdf" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Selecciona el PDF del contrato" /><br /><br />
+			<input type="SUBMIT" value="Validar Contrato" style="width:200px; height:30px;" />
+		</form>
+	</body>
+  </html>
+  ```      
+
 ## Licencia
 Desarrollado por [Licity S.C.](https://www.licity.co) Disponible en [Licencia MIT](licencia).
