@@ -229,7 +229,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```      
 
-### C) Validación de contrato
+### D) Validación de contrato
 Esta sección de la plataforma permite validar cualquier contrato generado desde nuestra plataforma.
 
 - **URL:** http://www.licity.co/api/contrato/valida
