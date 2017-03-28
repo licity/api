@@ -262,7 +262,7 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
 	  ```JSON
 	  {
 	  	"estatus" : "OK",
-	  	"valido" : 1,
+	  	"valido" : 1
 	  }
 	  ```
 
@@ -271,7 +271,7 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
 	  ```JSON
 	  {
 	  	"estatus" : "OK",
-	  	"valido" : 0,
+	  	"valido" : 0
 	  }
 	  ```
 
@@ -281,14 +281,14 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
 
       Dos posibles mensajes de error:
 
-      **El documentId ingresado no existe**
+      **El IDdocumento ingresado no existe**
 
-      Se genera cuando el Document ID ingresado no existe o no pertenece al Token enviado
+      Se genera cuando el ID Documento ingresado no existe o no pertenece al Token enviado
 
       ```json
       {
       	"estatus" : "ERROR",
-      	"mensaje" : "El documentId ingresado no existe"
+      	"mensaje" : "El IDdocumento ingresado no existe"
       }
       ```
 
