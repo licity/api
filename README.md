@@ -251,7 +251,7 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
   - **IDdocumento:** ID Documento del contrato, se localiza al pie de página de cada una de las hojas del contrato.
   - **pdf:** Archivo binario del contrato en formato PDF.
 - **Respuesta:**
-  - **Lista de contratos exitosa:**
+  - **Validación de contrato exitosa:**
     - **Formato:** JSON.
     - **Contenido:** Se muestra el estatus de la solicitud y la validez del contrato.
 
