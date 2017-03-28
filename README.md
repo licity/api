@@ -324,4 +324,4 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   ```      
 
 ## Licencia
-Desarrollado por [Licity S.C.](https://www.licity.co) Disponible en [Licencia MIT](licencia).
+Desarrollado por [Licity S.A. de C.V.](https://www.licity.co) Disponible en [Licencia MIT](licencia).
