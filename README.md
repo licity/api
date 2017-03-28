@@ -1,7 +1,7 @@
 # Manual de Uso - Plataforma para Empresas Licity
 Esta documentación muestra el uso de la plataforma para empresas de Licity (la "Plataforma Licity") para la firma electrónica y gestión de documentos. La plataforma permite (i) la firma electrónica de documentos; (ii) la descarga y consulta de documentos firmados; y (iii) la validación de documentos firmados, mediante el uso de un token de acceso proporcionado por Licity.
 
-Esta documentación y código de ejemplo se encuentra disponible en la URL https://www.licity.co/api/
+Esta documentación y código de ejemplo se encuentra disponible en la URL https://github.com/licity/api/
 
 Todas las peticiones a la Plataforma Licity deben de realizarse vía POST y responderá en formato HTML y/o JSON.
 
