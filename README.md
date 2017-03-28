@@ -248,7 +248,7 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
 - **URL:** http://www.licity.co/api/contrato/valida
 - **Varibles POST requeridas:**
   - **token:** Proporcionado por Licity.
-  - **documentId:** ID del contrato, se localiza al pie de página de cada una de las hojas del contrato.
+  - **IDdocumento:** ID Documento del contrato, se localiza al pie de página de cada una de las hojas del contrato.
   - **pdf:** Archivo binario del contrato en formato PDF.
 - **Respuesta:**
   - **Lista de contratos exitosa:**
