@@ -33,10 +33,10 @@ Al momento de contratar el servicio con Licity, la empresa deberá de proporcion
 - **URL:** http://www.licity.co/api/contrato/muestra/[ID_Plantilla] (El ID de la plantilla será proporcionado por Licity)
 - **Varibles POST requeridas:**
   - **token:** Proporcionado por Licity.
-  - **urlRespuesta:** URL a desplegar una vez que el cliente / usuario a completado la firma del contrato de manera exitosa.
+  - **urlRespuesta:** URL a desplegar una vez que el cliente / usuario ha completado la firma del contrato de manera exitosa.
   - **emailCliente:** Correo electrónico del cliente / usuario a donde se enviará original del contrato firmado.
   - **nombreCliente:** Nombre completo del cliente / usuario que firma el contrato.
-  - **datos:** datos para reemplazar las etiquetas presentes en el contrato. Los datos deben de venir en formato JSON ej:
+  - **datos:** Datos para reemplazar las etiquetas presentes en el contrato. Los datos deben de venir en formato JSON ej:
       
       ```json
       {
@@ -79,7 +79,7 @@ Al momento de contratar el servicio con Licity, la empresa deberá de proporcion
 Una vez que el usuario firme el contrato y se tome la fotografía, la aplicación mostrará la urlRespuesta y enviará por correo electrónico el PDF del original del contrato al cliente / usuario y otro a la dirección de correo electrónico que tengan configurada en nuestra plataforma.
 
 - **Código muestra:** 
-Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/prueba.html).
+Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/prueba.html).
 
   ```HTML
   <!DOCTYPE html>
@@ -170,7 +170,7 @@ Esta sección de la plataforma permite listar los contratos que pertenecen al TO
 - **Respuesta:**
   - **Lista de contratos exitosa:**
     - **Formato:** JSON.
-    - **Contenido:** Se muestra el estatus, el número de resultados y un array con los ID's de contratos junto con su fecha de firma, nombre y correo electrónico del cliente a partir del rango seleccionado.
+    - **Contenido:** Se muestra el estatus, el número de resultados y un array con los ID's de contratos junto con su fecha de firma, ID del documento, nombre y correo electrónico del cliente a partir del rango seleccionado.
 	```JSON
 	{
 		"estatus" : "OK",
@@ -179,12 +179,14 @@ Esta sección de la plataforma permite listar los contratos que pertenecen al TO
 						{
 							"ID" : 123,
 							"fechaFirma" : "2017-01-12",
+							"IDdocumento" : "094d8449b5e354251cdab191f3b8611fb8f24875a581367f2728df6b8921495h",
 							"nombre" : "Luis Cárdenas",
 							"email" : "luis@licity.co"
 						},
 						{
 							"ID":124,
 							"fechaFirma" : "2017-01-13",
+							"IDdocumento" : "094d8449b5e354251cdab191f3b8611fb8f24875a581367f2728df6b8921495g",
 							"nombre" : "Víctor Castañeda",
 							"email" : "victor@licity.co"
 						}
