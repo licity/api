@@ -1,42 +1,42 @@
-# Manual de uso de la plataforma para empresas de Licity
-Esta documentación muestra el uso de la plataforma para la firma de contratos de Licity. La plataforma permite la firma de contratos mediante el uso de un token de acceso proporcionado por Licity.
+# Manual de Uso - Plataforma para Empresas Licity
+Esta documentación muestra el uso de la plataforma para empresas de Licity (la "Plataforma Licity") para la firma electrónica y gestión de documentos. La plataforma permite (i) la firma electrónica de documentos; (ii) la descarga y consulta de documentos firmados; y (iii) la validación de documentos firmados, mediante el uso de un token de acceso proporcionado por Licity.
 
 Esta documentación y código de ejemplo se encuentra disponible en la URL https://www.licity.co/api/
 
-Todas las peticiones a la plataforma deben de realizarse vía POST y responderá en formato HTML y/o JSON.
+Todas las peticiones a la Plataforma Licity deben de realizarse vía POST y responderá en formato HTML y/o JSON.
 
 Tabla de Contenidos
 ===================
 
   - [Instalación](#instalacion)
   - [Uso](#uso)
-    - [A) Muestra preliminar del contrato y solicitud de firma y foto](#a-muestra-preliminar-del-contrato-y-solicitud-de-firma-y-foto)
-	- [B) Descarga de contrato](#b-descarga-de-contrato) 
-	- [C) Lista de contratos](#c-lista-de-contratos)
-	- [D) Validación de contrato](#d-validacion-de-contrato)
+    - [A) Muestra preliminar del documento y solicitud de firma y foto](#a-muestra-preliminar-del-documento-y-solicitud-de-firma-y-foto)
+	- [B) Descarga de documento](#b-descarga-de-documento) 
+	- [C) Lista de documentos](#c-lista-de-documentos)
+	- [D) Validación de documento](#d-validacion-de-documento)
   - [Licencia](#licencia)
 
 ## Instalación
-Obtén la última versión de esta plataforma:
+Obtén la última versión de la Plataforma Licity:
 
     git clone https://github.com/licity/api
 
 ## Uso
 
-A continuación se describen las distintas funcionalidades que proporciona la plataforma.
+A continuación se describen las distintas funcionalidades que proporciona la Plataforma Licity.
 
-### A) Muestra preliminar del contrato y solicitud de firma y foto
-Esta primera etapa de la plataforma es una aplicación web que puede ser mostrada de forma directa en un navegador de escritorio o dispositivo móvil, así como puede ser llamada desde una webview dentro de una aplicación móvil.
+### A) Muestra preliminar del documento y solicitud de firma y foto
+Esta primera versión de la Plataforma Licity se resuelve en una aplicación web que puede ser mostrada de forma directa en un navegador de escritorio o dispositivo móvil, así como puede ser llamada desde una webview dentro de una aplicación móvil.
 
-Al momento de contratar el servicio con Licity, la empresa deberá de proporcionar la plantilla de su contrato que deberá de contener etiquetas del tipo `[ETIQUETA]` que serán reemplazadas por los valores enviados vía POST.
+Al momento de contratar el servicio con Licity, la empresa deberá de proporcionar la plantilla del documento a ser automatizado y que deberá de contener etiquetas del tipo `[ETIQUETA]` que serán reemplazadas por los valores enviados vía POST.
 
-- **URL:** http://www.licity.co/api/contrato/muestra/[ID_Plantilla] (El ID de la plantilla será proporcionado por Licity)
+- **URL:** http://www.licity.co/api/documento/muestra/[ID_Plantilla] (El ID de la plantilla será proporcionado por Licity)
 - **Varibles POST requeridas:**
   - **token:** Proporcionado por Licity.
-  - **urlRespuesta:** URL a desplegar una vez que el cliente / usuario ha completado la firma del contrato de manera exitosa.
-  - **emailCliente:** Correo electrónico del cliente / usuario a donde se enviará original del contrato firmado.
-  - **nombreCliente:** Nombre completo del cliente / usuario que firma el contrato.
-  - **datos:** Datos para reemplazar las etiquetas presentes en el contrato. Los datos deben de venir en formato JSON ej:
+  - **urlRespuesta:** URL a desplegar una vez que el usuario del cliente ha completado la firma del documento de manera exitosa.
+  - **emailCliente:** Correo electrónico del usuario del cliente a donde se enviará original del documento firmado.
+  - **nombreCliente:** Nombre completo del usuario del cliente que firma el documento.
+  - **datos:** Datos para reemplazar las etiquetas presentes en el documento. Los datos deben de venir en formato JSON ej:
       
       ```json
       {
@@ -47,7 +47,7 @@ Al momento de contratar el servicio con Licity, la empresa deberá de proporcion
 - **Respuesta:**
   - **Muestra exitosa:**
     - **Formato:** HTML.
-    - **Contenido:** Se muestra vista previa del contrato con canvas para firma, botón para capturar fotografía y botón de continuar.
+    - **Contenido:** Se muestra vista previa del documento con canvas para firma, botón para capturar fotografía y botón de continuar.
   - **Error:**
     - **Formato:** JSON.
     - **Contenido:**
@@ -76,7 +76,7 @@ Al momento de contratar el servicio con Licity, la empresa deberá de proporcion
       }
       ```
 - **Funcionalidad:**
-Una vez que el usuario firme el contrato y se tome la fotografía, la aplicación mostrará la urlRespuesta y enviará por correo electrónico el PDF del original del contrato al cliente / usuario y otro a la dirección de correo electrónico que tengan configurada en nuestra plataforma.
+Una vez que el usuario del cliente firme el documento y se tome la fotografía, la aplicación mostrará la urlRespuesta y enviará por correo electrónico el PDF del original del documento al usuario del cliente y a la dirección de correo electrónico que el cliente tenga dada de alta en la Plataforma Licity.
 
 - **Código muestra:** 
 Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/prueba.html).
@@ -87,45 +87,45 @@ Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. E
   	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Prueba de creación de contrato</title>
+		<title>Prueba de creación de documento</title>
 	</head>
 	<body>
-		<form action="https://www.licity.co/api/contrato/muestra/[ID PLANTILLA CONTRATO]" method="post">
+		<form action="https://www.licity.co/api/documento/muestra/[ID PLANTILLA DOCUMENTO]" method="post">
 			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
 			<input type="text" name="urlRespuesta" id="urlRespuesta" value="" style="width:300px; height: 30px; padding:5px;" placeholder="URL Respuesta (ej. https://www.licity.co)" /><br /><br />
 			<textarea name="datos" id="datos" style="width:400px; height:400px;">{ "ETIQUETA":"Valor reemplazo 1","ETIQUETA2":"Valor reemplazo 2" }</textarea><br /> <br />
 			<input type="email" name="emailCliente" id="emailCliente" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Email Cliente" /><br /><br />
 			<input type="text" name="nombreCliente" id="nombreCliente" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Nombre Cliente" /><br /><br />
-			<input type="SUBMIT" value="Firmar Contrato" style="width:200px; height:30px;" />
+			<input type="SUBMIT" value="Firmar Documento" style="width:200px; height:30px;" />
 		</form>
 	</body>
   </html>
   ```
 
-### B) Descarga de contrato
-Esta sección de la plataforma permite la descarga de un contato a partir de su ID.
+### B) Descarga de documento
+Esta sección de la Plataforma Licity permite la descarga de un documento firmado y definitivo a partir de su ID.
 
-- **URL:** http://www.licity.co/api/contrato/[ID_Contrato] (El ID del contrato se obtiene utilizando el listado de contratos descrito porsteriormente)
-- **Varibles POST requeridas:**
+- **URL:** http://www.licity.co/api/documento/[ID_Documento] (El ID del documento se obtiene utilizando el listado de documentos descrito porsteriormente)
+- **Variables POST requeridas:**
   - **token:** Proporcionado por Licity.
 - **Respuesta:**
   - **Muestra exitosa:**
     - **Formato:** PDF.
-    - **Contenido:** Se muestra el PDF del contrato firmado para su descarga.
+    - **Contenido:** Se muestra el PDF del documento firmado para su descarga.
   - **Error:**
     - **Formato:** JSON.
     - **Contenido:**
 
       Dos posibles mensajes de error:
 
-      **El contrato solicitado no existe o no pertenece a la empresa**
+      **El documento solicitado no existe o no pertenece a la empresa**
 
       Se genera cuando el ID de la plantilla solicitada no existe o no pertenece a la empresa.
 
       ```json
       {
       	"estatus" : "ERROR",
-      	"mensaje" : "El contrato no existe"
+      	"mensaje" : "El documento no existe"
       }
       ```
 
@@ -140,7 +140,7 @@ Esta sección de la plataforma permite la descarga de un contato a partir de su 
       }
       ```
 - **Código muestra:** 
-Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/contrato.html).
+Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/documento.html).
 
   ```HTML
   <!DOCTYPE html>
@@ -148,29 +148,29 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Prueba de descarga de contrato</title>
+		<title>Prueba de descarga de documento</title>
 	</head>
 	<body>
-		<form action="https://www.licity.co/api/contrato/[ID CONTRATO]" method="post">
+		<form action="https://www.licity.co/api/documento/[ID DOCUMENTO]" method="post">
 			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
-			<input type="SUBMIT" value="Descarga Contrato" style="width:200px; height:30px;" />
+			<input type="SUBMIT" value="Descarga Documento" style="width:200px; height:30px;" />
 		</form>
 	</body>
   </html>
   ```      
 
-### C) Lista de contratos
-Esta sección de la plataforma permite listar los contratos que pertenecen al TOKEN enviado.
+### C) Lista de documentos
+Esta sección de la plataforma permite listar los documentos que pertenecen al TOKEN enviado.
 
-- **URL:** http://www.licity.co/api/contrato 
+- **URL:** http://www.licity.co/api/documento 
 - **Varibles POST requeridas:**
   - **token:** Proporcionado por Licity.
-  - **fechaInicio:** AAAA-MM-DD (La fecha a partir de la cuál se quiren obtener contratos, la fecha corresponde a la fecha de firma del contrato).
-  - **fechaFin:** AAAA-MM-DD (La fecha límite para obtener contratos, la fecha corresponde a la fecha de firma del contrato).
+  - **fechaInicio:** AAAA-MM-DD (La fecha a partir de la cuál se quieren obtener documentos, la fecha corresponde a la fecha de firma del documento).
+  - **fechaFin:** AAAA-MM-DD (La fecha límite para obtener documentos, la fecha corresponde a la fecha de firma del documento).
 - **Respuesta:**
-  - **Lista de contratos exitosa:**
+  - **Lista de documentos exitosa:**
     - **Formato:** JSON.
-    - **Contenido:** Se muestra el estatus, el número de resultados y un array con los ID's de contratos junto con su fecha de firma, ID del documento, nombre y correo electrónico del cliente a partir del rango seleccionado.
+    - **Contenido:** Se muestra el estatus, el número de resultados y un array con los ID's de documentos junto con su fecha de firma, ID del documento, nombre y correo electrónico del cliente a partir del rango seleccionado.
 	```JSON
 	{
 		"estatus" : "OK",
@@ -229,35 +229,35 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Prueba de listado de contratos</title>
+		<title>Prueba de listado de documentos</title>
 	</head>
 	<body>
-		<form action="https://www.licity.co/api/contrato" method="post">
+		<form action="https://www.licity.co/api/documento" method="post">
 			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
 			<input type="date" name="fechaInicio" id="fechaInicio" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha de inicio" /><br /><br />
 			<input type="date" name="fechaFin" id="fechaFin" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha fin" /><br /><br />
-			<input type="SUBMIT" value="Lista Contratos" style="width:200px; height:30px;" />
+			<input type="SUBMIT" value="Lista Documentos" style="width:200px; height:30px;" />
 		</form>
 	</body>
   </html>
   ```      
 
-### D) Validación de contrato
-Esta sección de la plataforma permite validar cualquier contrato generado desde nuestra plataforma.
+### D) Validación de documento
+Esta sección de la plataforma permite validar cualquier documento generado desde nuestra plataforma.
 
-- **URL:** http://www.licity.co/api/contrato/valida
+- **URL:** http://www.licity.co/api/documento/valida
 - **Varibles POST requeridas:**
   - **token:** Proporcionado por Licity.
-  - **IDdocumento:** ID Documento del contrato, se localiza al pie de página de cada una de las hojas del contrato.
-  - **pdf:** Archivo binario del contrato en formato PDF.
+  - **IDdocumento:** ID Documento del documento, se localiza al pie de página de cada una de las hojas del documento firmado.
+  - **pdf:** Archivo binario del documento firmado en formato PDF.
 - **Respuesta:**
-  - **Validación de contrato exitosa:**
+  - **Validación de documento exitosa:**
     - **Formato:** JSON.
-    - **Contenido:** Se muestra el estatus de la solicitud y la validez del contrato.
+    - **Contenido:** Se muestra el estatus de la solicitud y la validez del documento.
 
       Dos posibles mensajes:
 	  
-      **El contrato es válido**
+      **El documento es válido**
 
 	  ```JSON
 	  {
@@ -266,7 +266,7 @@ Esta sección de la plataforma permite validar cualquier contrato generado desde
 	  }
 	  ```
 
-      **El contrato no es válido**
+      **El documento no es válido**
 
 	  ```JSON
 	  {
@@ -311,12 +311,12 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Prueba de listado de contratos</title>
+		<title>Prueba de listado de documentos</title>
 	</head>
 	<body>
-		<form action="https://www.licity.co/api/contrato/valida" method="post" enctype="multipart/form-data">
+		<form action="https://www.licity.co/api/documento/valida" method="post" enctype="multipart/form-data">
 			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
-			<input type="file" name="pdf" id="pdf" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Selecciona el PDF del contrato" /><br /><br />
+			<input type="file" name="pdf" id="pdf" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Selecciona el PDF del documento" /><br /><br />
 			<input type="SUBMIT" value="Validar Contrato" style="width:200px; height:30px;" />
 		</form>
 	</body>
