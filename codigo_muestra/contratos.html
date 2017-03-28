@@ -7,10 +7,10 @@
 	<title>Prueba de listado de contratos</title>
 </head>
 <body>
-	<form action="https://www.licity.co/api/contrato/[ID CONTRATO]" method="post">
+	<form action="https://www.licity.co/api/contrato" method="post">
 		<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
-		<input type="text" name="fechaInicio" id="fechaInicio" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha de inicio" /><br /><br />
-		<input type="text" name="fechaFin" id="fechaFin" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha fin" /><br /><br />
+		<input type="date" name="fechaInicio" id="fechaInicio" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha de inicio" /><br /><br />
+		<input type="date" name="fechaFin" id="fechaFin" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa la fecha fin" /><br /><br />
 		<input type="SUBMIT" value="Lista Contratos" style="width:200px; height:30px;" />
 	</form>
 </body>
