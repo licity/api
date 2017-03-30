@@ -316,6 +316,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
 	<body>
 		<form action="https://www.licity.co/api/documento/valida" method="post" enctype="multipart/form-data">
 			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<input type="text" name="IDdocumento" id="IDdocumento" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el IDdocumento presente en el PDF del contrato" /><br /><br />
 			<input type="file" name="pdf" id="pdf" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Selecciona el PDF del documento" /><br /><br />
 			<input type="SUBMIT" value="Validar Contrato" style="width:200px; height:30px;" />
 		</form>
