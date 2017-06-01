@@ -11,9 +11,12 @@ Tabla de Contenidos
   - [Instalación](#instalacion)
   - [Uso](#uso)
     - [A) Muestra preliminar del documento y solicitud de firma y foto](#a-muestra-preliminar-del-documento-y-solicitud-de-firma-y-foto)
-	- [B) Descarga de documento](#b-descarga-de-documento) 
-	- [C) Lista de documentos](#c-lista-de-documentos)
-	- [D) Validación de documento](#d-validacion-de-documento)
+    - [B) Vista previa del documento](#b-vista-previa-del-documento)
+    - [C) Firma del documento](#c-firma-del-documento)
+	- [D) Descarga de documento](#d-descarga-de-documento) 
+	- [E) Lista de documentos](#e-lista-de-documentos)
+	- [F) Validación de documento](#f-validacion-de-documento)
+	- [G) Descarga de foto](#g-descarga-de-foto)
   - [Licencia](#licencia)
 
 ## Instalación
@@ -102,7 +105,147 @@ Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. E
   </html>
   ```
 
-### B) Descarga de documento
+### B) Vista previa del documento
+Esta sección de la Plataforma Licity permite mostrar una vista previa del documento a firmar.
+
+- **URL:** http://www.licity.co/api/documento/vista_previa/[ID_Plantilla] (El ID de la plantilla será proporcionado por Licity)
+- **Varibles POST requeridas:**
+  - **token:** Proporcionado por Licity.
+  - **datos:** Datos para reemplazar las etiquetas presentes en el documento. Los datos deben de venir en formato JSON ej:
+      
+      ```json
+      {
+      	"NOMBRE":"Luis Cárdenas",
+      	"FECHAREGISTRO":"12 de enero de 2017"
+      }
+      ```
+- **Respuesta:**
+  - **Muestra exitosa:**
+    - **Formato:** HTML.
+    - **Contenido:** Se muestra vista previa del documento.
+  - **Error:**
+    - **Formato:** JSON.
+    - **Contenido:**
+
+      Dos posibles mensajes de error:
+
+      **La plantilla solicitada no existe**
+
+      Se genera cuando el ID de la plantilla solicitada no existe o no pertenece a la empresa.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "La plantilla seleccionada no existe"
+      }
+      ```
+
+      **Los datos enviados son incorrectos**
+
+      Se genera cuando el token enviado no es correcto o no se encuentra vigente. Es necesario validar que el token de acceso sea correcto.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "Los datos enviados son incorrectos"
+      }
+      ```
+- **Funcionalidad:**
+La aplicación mostrará una vista previa del documento a firmar en formato HTML.
+
+- **Código muestra:** 
+Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/vista_previa.html).
+
+  ```HTML
+  <!DOCTYPE html>
+  <html>
+  	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Prueba de vista previa de documento</title>
+	</head>
+	<body>
+		<form action="https://www.licity.co/api/documento/vista_previa/[ID PLANTILLA DOCUMENTO]" method="post">
+			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<textarea name="datos" id="datos" style="width:400px; height:400px;">{ "ETIQUETA":"Valor reemplazo 1","ETIQUETA2":"Valor reemplazo 2" }</textarea><br /> <br />
+			<input type="SUBMIT" value="Vista Previa" style="width:200px; height:30px;" />
+		</form>
+	</body>
+  </html>
+  ```
+
+### C) Firma del contrato
+Esta sección de la Plataforma Licity muestra el canvas para firma y toma de fotografía.
+
+- **URL:** http://www.licity.co/api/documento/firma/[ID_Plantilla] (El ID de la plantilla será proporcionado por Licity)
+- **Varibles POST requeridas:**
+  - **token:** Proporcionado por Licity.
+  - **urlRespuesta:** URL a desplegar una vez que el usuario del cliente ha completado la firma del documento de manera exitosa. A esta URl le será concatenada el ID del documento firmado. Ej. ?id=12345
+  - **datos:** Datos para reemplazar las etiquetas presentes en el documento. Los datos deben de venir en formato JSON ej:
+      
+      ```json
+      {
+      	"NOMBRE":"Luis Cárdenas",
+      	"FECHAREGISTRO":"12 de enero de 2017"
+      }
+      ```
+- **Respuesta:**
+  - **Muestra exitosa:**
+    - **Formato:** HTML.
+    - **Contenido:** Se muestra canvas para firma, botón para capturar fotografía y botón de continuar.
+  - **Error:**
+    - **Formato:** JSON.
+    - **Contenido:**
+
+      Dos posibles mensajes de error:
+
+      **La plantilla solicitada no existe**
+
+      Se genera cuando el ID de la plantilla solicitada no existe o no pertenece a la empresa.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "La plantilla seleccionada no existe"
+      }
+      ```
+
+      **Los datos enviados son incorrectos**
+
+      Se genera cuando el token enviado no es correcto o no se encuentra vigente. Es necesario validar que el token de acceso sea correcto.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "Los datos enviados son incorrectos"
+      }
+      ```
+- **Funcionalidad:**
+Una vez que el usuario del cliente firme el documento y se tome la fotografía, la aplicación mostrará la urlRespuesta con el ID del documento concatenado.
+
+- **Código muestra:** 
+Incluimos un formulario HTML de muestra en el que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/prueba.html).
+
+  ```HTML
+  <!DOCTYPE html>
+  <html>
+  	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Prueba de firma de documento</title>
+	</head>
+	<body>
+		<form action="https://www.licity.co/api/documento/firma/[ID PLANTILLA DOCUMENTO]" method="post">
+			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<input type="text" name="urlRespuesta" id="urlRespuesta" value="" style="width:300px; height: 30px; padding:5px;" placeholder="URL Respuesta (ej. https://www.licity.co)" /><br /><br />
+			<textarea name="datos" id="datos" style="width:400px; height:400px;">{ "ETIQUETA":"Valor reemplazo 1","ETIQUETA2":"Valor reemplazo 2" }</textarea><br /> <br />
+			<input type="SUBMIT" value="Firmar Documento" style="width:200px; height:30px;" />
+		</form>
+	</body>
+  </html>
+  ```
+
+### D) Descarga de documento
 Esta sección de la Plataforma Licity permite la descarga de un documento firmado y definitivo a partir de su ID.
 
 - **URL:** http://www.licity.co/api/documento/[ID_Documento] (El ID del documento se obtiene utilizando el listado de documentos descrito porsteriormente)
@@ -159,7 +302,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```      
 
-### C) Lista de documentos
+### E) Lista de documentos
 Esta sección de la plataforma permite listar los documentos que pertenecen al TOKEN enviado.
 
 - **URL:** http://www.licity.co/api/documento 
@@ -242,7 +385,7 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
   </html>
   ```      
 
-### D) Validación de documento
+### F) Validación de documento
 Esta sección de la plataforma permite validar cualquier documento generado desde nuestra plataforma.
 
 - **URL:** http://www.licity.co/api/documento/valida
@@ -319,6 +462,63 @@ Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este
 			<input type="text" name="IDdocumento" id="IDdocumento" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el IDdocumento presente en el PDF del contrato" /><br /><br />
 			<input type="file" name="pdf" id="pdf" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Selecciona el PDF del documento" /><br /><br />
 			<input type="SUBMIT" value="Validar Contrato" style="width:200px; height:30px;" />
+		</form>
+	</body>
+  </html>
+  ```      
+
+### G) Descarga de foto
+Esta sección de la Plataforma Licity permite la descarga de la foto del firmante a partir del ID del documento.
+
+- **URL:** http://www.licity.co/api/foto/[ID_Documento] (El ID del documento se obtiene utilizando el listado de documentos descrito anteriormente)
+- **Variables POST requeridas:**
+  - **token:** Proporcionado por Licity.
+- **Respuesta:**
+  - **Muestra exitosa:**
+    - **Formato:** JPG.
+    - **Contenido:** Se muestra la fotografía en formato JPG para su descarga.
+  - **Error:**
+    - **Formato:** JSON.
+    - **Contenido:**
+
+      Dos posibles mensajes de error:
+
+      **El documento solicitado no existe o no pertenece a la empresa**
+
+      Se genera cuando el ID del documento solicitado no existe o no pertenece a la empresa.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "El documento no existe"
+      }
+      ```
+
+      **Los datos enviados son incorrectos**
+
+      Se genera cuando el token enviado no es correcto o no se encuentra vigente. Es necesario validar que el token de acceso sea correcto.
+
+      ```json
+      {
+      	"estatus" : "ERROR",
+      	"mensaje" : "Los datos enviados son incorrectos"
+      }
+      ```
+- **Código muestra:** 
+Incluimos un formulario HTML de muestra en que pueden hacer pruebas de uso. Este código se encuentra [aquí](codigo_muestra/documento.html).
+
+  ```HTML
+  <!DOCTYPE html>
+  <html>
+  	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Prueba de descarga de foto</title>
+	</head>
+	<body>
+		<form action="https://www.licity.co/api/foto/[ID DOCUMENTO]" method="post">
+			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<input type="SUBMIT" value="Descarga Foto" style="width:200px; height:30px;" />
 		</form>
 	</body>
   </html>

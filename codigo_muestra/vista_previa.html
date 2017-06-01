@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Prueba de vista de contrato</title>
+	</head>
+	<body>
+		<form action="https://www.licity.co/api/documento/vista_previa/[ID PLANTILLA CONTRATO]" method="post">
+			<input type="text" name="token" id="token" value="" style="width:300px; height: 30px; padding:5px;" placeholder="Ingresa el token proporcionado por Licity" /><br /><br />
+			<textarea name="datos" id="datos" style="width:400px; height:400px;">{ "ETIQUETA":"Valor reemplazo 1","ETIQUETA2":"Valor reemplazo 2" }</textarea><br /> <br />
+			<input type="SUBMIT" value="Vista Previa" style="width:200px; height:30px;" />
+		</form>
+	</body>
+</html>
